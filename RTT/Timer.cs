@@ -9,55 +9,53 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO.Ports;
 
 namespace RTT
 {
     public partial class Timer : Form
     {
         Stopwatch stopwatch;
+        System.Timers.Timer solveTimer;
 
         IEnumerable<User> _users = null;
         User _currentUser = null;
-
-        // The last time the timer was started
-        private DateTime _startTime = DateTime.MinValue;
-
-        // Time between now and when the timer was started last
-        private TimeSpan _currentElapsedTime = TimeSpan.Zero;
-
-        // Time between now and the first time timer was started after a reset
-        private TimeSpan _totalElapsedTime = TimeSpan.Zero;
-
-        // Whether or not the timer is currently running
-        private bool _timerRunning = false;
-
 
         public Timer()
         {
             InitializeComponent();
             BindUsers();
+            BindGrids();
 
-            solveTimer.Interval = 1000 * 1;
-            solveTimer.Tick += solveTimer_Tick;
+            stopwatch = new Stopwatch();
+            
+            solveTimer = new System.Timers.Timer();
+            solveTimer.Interval = 10 * 1;
+            solveTimer.Elapsed += solveTimer_Tick;
+        }
+
+        public void BindGrids()
+        {
+            dgvLast10.DataSource = Database.TopSolveTimes(10, _currentUser.UserId).ToList();
+            dgvTop10.DataSource = Database.TopSolveTimes(10).ToList();
+        }
+
+
+        private delegate void UpdateStatusDelegate(string status);
+        private void UpdateStatus(string status)
+        {
+            if (this.lblTime.InvokeRequired)
+            {
+                this.Invoke(new UpdateStatusDelegate(this.UpdateStatus), new object[] { status });
+                return;
+            }
+
+            this.lblTime.Text = status;
         }
 
         void solveTimer_Tick(object sender, EventArgs e)
         {
-            // We do this to chop off any stray milliseconds resulting from 
-            // the Timer's inherent inaccuracy, with the bonus that the 
-            // TimeSpan.ToString() method will now show correct HH:MM:SS format
-            var timeSinceStartTime = DateTime.Now - _startTime;
-            timeSinceStartTime = new TimeSpan(timeSinceStartTime.Hours,
-                                              timeSinceStartTime.Minutes,
-                                              timeSinceStartTime.Seconds);
-
-            // The current elapsed time is the time since the start button was
-            // clicked, plus the total time elapsed since the last reset
-            _currentElapsedTime = timeSinceStartTime + _totalElapsedTime;
-
-            // These are just two Label controls which display the current 
-            // elapsed time and total elapsed time
-            lblTime.Text = timeSinceStartTime.ToString();
+            UpdateStatus(stopwatch.Elapsed.ToString(@"mm\:ss\.ff"));
         }
 
         public void BindUsers()
@@ -67,6 +65,8 @@ namespace RTT
             cboUsers.DataSource = _users.ToList();
             cboUsers.DisplayMember = "Username";
             cboUsers.ValueMember = "UserId";
+
+
         }
         private void usersToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -75,26 +75,99 @@ namespace RTT
             userForm.ShowDialog();
         }
 
-        private void Timer_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void cboUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
             _currentUser = cboUsers.SelectedItem as User;
+            dgvLast10.DataSource = Database.TopSolveTimes(10, _currentUser.UserId).ToList();
+            
+
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            stopwatch.Start();
-            solveTimer.Start();
+            Start();
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
         {
+            Stop();
+        }
+
+        private void btnReady_Click(object sender, EventArgs e)
+        {
+            OpenSerialPort("COM3");
+        }
+        
+        private SerialPort _serialPort;
+        private int _previousValue = -10000;
+
+        private void OpenSerialPort(string portName)
+        {
+            _serialPort = new SerialPort(portName);
+            _serialPort.Open();
+            _serialPort.DataReceived += serialPort_DataReceived;
+        }
+
+        private void serialPort_DataReceived(object s, SerialDataReceivedEventArgs e)
+        {
+            int value = Convert.ToInt32(_serialPort.ReadLine());
+
+            if (_previousValue == -10000)
+            {
+                _previousValue = value;
+            }
+            else
+            {
+                if (value != 0)
+                {
+                    decimal difference = (_previousValue - value) * -1;
+
+                    if (difference > 80)
+                    {
+                        if (!stopwatch.IsRunning)
+                        {
+                            Debug.WriteLine("Starting timer");
+                            Start();
+                            
+                        }
+                    }
+                    else
+                    {
+                        if (stopwatch.IsRunning)
+                        {
+                            Debug.WriteLine("Stopping timer");
+                            Stop();
+                        }
+                    }
+                }
+                else
+                {
+                    if (stopwatch.IsRunning)
+                    {
+                        Debug.WriteLine("Stopping timer");
+                        Stop();
+                    }
+                }
+            }
+        }
+
+        private void Start()
+        {
+            stopwatch.Start();
+            solveTimer.Start();
+
+            cboUsers.Enabled = false;
+            btnSave.Enabled = false;
+            
+        }
+
+        private void Stop()
+        {
             stopwatch.Stop();
             solveTimer.Stop();
+
+            cboUsers.Enabled = true;
+            btnSave.Enabled = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -103,13 +176,22 @@ namespace RTT
 
             solveTime.UserId = _currentUser.UserId;
             solveTime.SolveDate = DateTime.Now;
-            solveTime.ElapsedTime = _currentElapsedTime;
+            solveTime.ElapsedTime = stopwatch.Elapsed;
 
             Database.DBContext.SolveTimes.Add(solveTime);
 
             Database.DBContext.SaveChanges();
+
+            stopwatch.Reset();
+            lblTime.Text = "00:00:00";
+
+            BindGrids();
         }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
     }
 }

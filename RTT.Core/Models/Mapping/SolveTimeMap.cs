@@ -9,11 +9,11 @@ namespace RTT.Core.Models.Mapping
         public SolveTimeMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.TimeId, t.UserId, t.SolveDate, ElapsedTime = t.ElapsedTime });
+            this.HasKey(t => t.TimeId);
 
             // Properties
             this.Property(t => t.TimeId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             this.Property(t => t.UserId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
