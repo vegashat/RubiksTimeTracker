@@ -62,7 +62,7 @@
             this.usersToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(330, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(569, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -139,7 +139,7 @@
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 41);
             this.btnEnd.TabIndex = 5;
-            this.btnEnd.Text = "End";
+            this.btnEnd.Text = "Stop";
             this.btnEnd.UseVisualStyleBackColor = true;
             this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
@@ -147,7 +147,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 248);
+            this.ClientSize = new System.Drawing.Size(569, 248);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblTime);
@@ -157,7 +157,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Timer";
             this.Text = "Record Time";
-            this.Load += new System.EventHandler(this.Timer_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
