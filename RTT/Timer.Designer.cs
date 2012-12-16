@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.cboUsers = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,7 +39,7 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
-            this.solveTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnReady = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,11 +142,22 @@
             this.btnEnd.UseVisualStyleBackColor = true;
             this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
+            // btnReady
+            // 
+            this.btnReady.Location = new System.Drawing.Point(388, 188);
+            this.btnReady.Name = "btnReady";
+            this.btnReady.Size = new System.Drawing.Size(75, 23);
+            this.btnReady.TabIndex = 6;
+            this.btnReady.Text = "Ready";
+            this.btnReady.UseVisualStyleBackColor = true;
+            this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
+            // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(569, 248);
+            this.Controls.Add(this.btnReady);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblTime);
@@ -177,7 +187,7 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnEnd;
-        private System.Windows.Forms.Timer solveTimer;
+        private System.Windows.Forms.Button btnReady;
     }
 }
 
