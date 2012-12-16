@@ -46,6 +46,8 @@
             this.resultsContainer = new System.Windows.Forms.SplitContainer();
             this.dgvLast10 = new System.Windows.Forms.DataGridView();
             this.dgvTop10 = new System.Windows.Forms.DataGridView();
+            this.lblUserLast10 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultsContainer)).BeginInit();
@@ -74,7 +76,7 @@
             this.usersToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(949, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(975, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,7 +129,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(21, 99);
+            this.lblTime.Location = new System.Drawing.Point(21, 113);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(284, 73);
             this.lblTime.TabIndex = 3;
@@ -137,50 +139,54 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(34, 188);
+            this.btnStart.Location = new System.Drawing.Point(772, 201);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 41);
             this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Visible = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnEnd
             // 
             this.btnEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnd.Location = new System.Drawing.Point(230, 188);
+            this.btnEnd.Location = new System.Drawing.Point(853, 201);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 41);
             this.btnEnd.TabIndex = 5;
             this.btnEnd.Text = "Stop";
             this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Visible = false;
             this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
             // btnReady
             // 
-            this.btnReady.Location = new System.Drawing.Point(334, 188);
+            this.btnReady.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReady.Location = new System.Drawing.Point(34, 189);
             this.btnReady.Name = "btnReady";
-            this.btnReady.Size = new System.Drawing.Size(75, 23);
+            this.btnReady.Size = new System.Drawing.Size(271, 41);
             this.btnReady.TabIndex = 6;
-            this.btnReady.Text = "Ready";
+            this.btnReady.Text = "Prepare stopwatch";
             this.btnReady.UseVisualStyleBackColor = true;
             this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(470, 187);
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(311, 189);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 42);
+            this.btnSave.Size = new System.Drawing.Size(159, 42);
             this.btnSave.TabIndex = 7;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Save Time";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 513);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 562);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(949, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(975, 22);
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -189,7 +195,7 @@
             this.panel1.Controls.Add(this.resultsContainer);
             this.panel1.Location = new System.Drawing.Point(12, 248);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(927, 256);
+            this.panel1.Size = new System.Drawing.Size(927, 290);
             this.panel1.TabIndex = 9;
             // 
             // resultsContainer
@@ -200,12 +206,14 @@
             // 
             // resultsContainer.Panel1
             // 
+            this.resultsContainer.Panel1.Controls.Add(this.lblUserLast10);
             this.resultsContainer.Panel1.Controls.Add(this.dgvLast10);
             // 
             // resultsContainer.Panel2
             // 
+            this.resultsContainer.Panel2.Controls.Add(this.label1);
             this.resultsContainer.Panel2.Controls.Add(this.dgvTop10);
-            this.resultsContainer.Size = new System.Drawing.Size(927, 256);
+            this.resultsContainer.Size = new System.Drawing.Size(927, 290);
             this.resultsContainer.SplitterDistance = 458;
             this.resultsContainer.TabIndex = 0;
             // 
@@ -214,30 +222,49 @@
             this.dgvLast10.AllowUserToAddRows = false;
             this.dgvLast10.AllowUserToDeleteRows = false;
             this.dgvLast10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLast10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvLast10.Location = new System.Drawing.Point(0, 0);
+            this.dgvLast10.Location = new System.Drawing.Point(0, 37);
             this.dgvLast10.Name = "dgvLast10";
             this.dgvLast10.ReadOnly = true;
-            this.dgvLast10.Size = new System.Drawing.Size(458, 256);
+            this.dgvLast10.Size = new System.Drawing.Size(458, 250);
             this.dgvLast10.TabIndex = 0;
+            this.dgvLast10.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLast10_CellContentClick);
             // 
             // dgvTop10
             // 
             this.dgvTop10.AllowUserToAddRows = false;
             this.dgvTop10.AllowUserToDeleteRows = false;
             this.dgvTop10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTop10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTop10.Location = new System.Drawing.Point(0, 0);
+            this.dgvTop10.Location = new System.Drawing.Point(0, 37);
             this.dgvTop10.Name = "dgvTop10";
             this.dgvTop10.ReadOnly = true;
-            this.dgvTop10.Size = new System.Drawing.Size(465, 256);
+            this.dgvTop10.Size = new System.Drawing.Size(465, 250);
             this.dgvTop10.TabIndex = 1;
+            // 
+            // lblUserLast10
+            // 
+            this.lblUserLast10.AutoSize = true;
+            this.lblUserLast10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserLast10.Location = new System.Drawing.Point(3, 11);
+            this.lblUserLast10.Name = "lblUserLast10";
+            this.lblUserLast10.Size = new System.Drawing.Size(161, 17);
+            this.lblUserLast10.TabIndex = 1;
+            this.lblUserLast10.Text = "Last 10 for Current User";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Top 10 Solve Times";
             // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 535);
+            this.ClientSize = new System.Drawing.Size(975, 584);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnSave);
@@ -255,7 +282,9 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.resultsContainer.Panel1.ResumeLayout(false);
+            this.resultsContainer.Panel1.PerformLayout();
             this.resultsContainer.Panel2.ResumeLayout(false);
+            this.resultsContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.resultsContainer)).EndInit();
             this.resultsContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLast10)).EndInit();
@@ -285,6 +314,8 @@
         private System.Windows.Forms.SplitContainer resultsContainer;
         private System.Windows.Forms.DataGridView dgvLast10;
         private System.Windows.Forms.DataGridView dgvTop10;
+        private System.Windows.Forms.Label lblUserLast10;
+        private System.Windows.Forms.Label label1;
     }
 }
 

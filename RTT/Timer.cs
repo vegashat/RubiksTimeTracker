@@ -95,6 +95,9 @@ namespace RTT
 
         private void btnReady_Click(object sender, EventArgs e)
         {
+            btnReady.Text = "Pick up cube to begin";
+            btnReady.Enabled = false;
+
             OpenSerialPort("COM3");
         }
         
@@ -191,6 +194,11 @@ namespace RTT
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvLast10_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }
