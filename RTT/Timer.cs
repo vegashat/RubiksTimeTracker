@@ -25,8 +25,6 @@ namespace RTT
         // Time between now and the first time timer was started after a reset
         private TimeSpan _totalElapsedTime = TimeSpan.Zero;
 
-        // Whether or not the timer is currently running
-        private bool _timerRunning = false;
 
 
         public Timer()
@@ -34,7 +32,7 @@ namespace RTT
             InitializeComponent();
             BindUsers();
 
-            solveTimer.Interval = 1000 * 1;
+            solveTimer.Interval = 100;
             solveTimer.Tick += solveTimer_Tick;
         }
 
@@ -46,7 +44,8 @@ namespace RTT
             var timeSinceStartTime = DateTime.Now - _startTime;
             timeSinceStartTime = new TimeSpan(timeSinceStartTime.Hours,
                                               timeSinceStartTime.Minutes,
-                                              timeSinceStartTime.Seconds);
+                                              timeSinceStartTime.Seconds,
+                                              timeSinceStartTime.Milliseconds);
 
             // The current elapsed time is the time since the start button was
             // clicked, plus the total time elapsed since the last reset
@@ -72,10 +71,6 @@ namespace RTT
             userForm.ShowDialog();
         }
 
-        private void Timer_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void cboUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -91,6 +86,20 @@ namespace RTT
         {
             solveTimer.Stop();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var solveTime = new SolveTime();
+
+            solveTime.UserId = _currentUser.UserId;
+            solveTime.SolveDate = DateTime.Now;
+            solveTime.ElapsedTime = _currentElapsedTime;
+
+            Database.DBContext.SolveTimes.Add(solveTime);
+
+            Database.DBContext.SaveChanges();
+        }
+
 
     }
 }

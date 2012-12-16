@@ -9,7 +9,7 @@ namespace RTT.Core.Models.Mapping
         public SolveTimeMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.TimeId, t.UserId, t.SolveDate, t.SolveTime1 });
+            this.HasKey(t => new { t.TimeId, t.UserId, t.SolveDate, ElapsedTime = t.ElapsedTime });
 
             // Properties
             this.Property(t => t.TimeId)
@@ -23,7 +23,7 @@ namespace RTT.Core.Models.Mapping
             this.Property(t => t.TimeId).HasColumnName("TimeId");
             this.Property(t => t.UserId).HasColumnName("UserId");
             this.Property(t => t.SolveDate).HasColumnName("SolveDate");
-            this.Property(t => t.SolveTime1).HasColumnName("SolveTime");
+            this.Property(t => t.ElapsedTime).HasColumnName("SolveTime");
 
             // Relationships
             this.HasRequired(t => t.User)

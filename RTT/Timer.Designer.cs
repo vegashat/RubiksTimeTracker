@@ -41,6 +41,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
             this.solveTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnSave = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,7 +136,7 @@
             // btnEnd
             // 
             this.btnEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnd.Location = new System.Drawing.Point(230, 188);
+            this.btnEnd.Location = new System.Drawing.Point(129, 188);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 41);
             this.btnEnd.TabIndex = 5;
@@ -143,11 +144,23 @@
             this.btnEnd.UseVisualStyleBackColor = true;
             this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Location = new System.Drawing.Point(230, 188);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 41);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // Timer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(330, 248);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblTime);
@@ -157,7 +170,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Timer";
             this.Text = "Record Time";
-            this.Load += new System.EventHandler(this.Timer_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -179,6 +191,7 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.Timer solveTimer;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 
