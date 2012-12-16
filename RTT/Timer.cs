@@ -82,6 +82,9 @@ namespace RTT
 
         private void btnReady_Click(object sender, EventArgs e)
         {
+            btnReady.Text = "Pick up cube to begin";
+            btnReady.Enabled = false;
+
             OpenSerialPort("COM3");
         }
         

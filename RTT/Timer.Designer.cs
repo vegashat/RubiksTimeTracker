@@ -123,32 +123,35 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(34, 188);
+            this.btnStart.Location = new System.Drawing.Point(401, 188);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 41);
             this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Visible = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnEnd
             // 
             this.btnEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnd.Location = new System.Drawing.Point(230, 188);
+            this.btnEnd.Location = new System.Drawing.Point(482, 188);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 41);
             this.btnEnd.TabIndex = 5;
             this.btnEnd.Text = "Stop";
             this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Visible = false;
             this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
             // btnReady
             // 
-            this.btnReady.Location = new System.Drawing.Point(388, 188);
+            this.btnReady.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReady.Location = new System.Drawing.Point(34, 189);
             this.btnReady.Name = "btnReady";
-            this.btnReady.Size = new System.Drawing.Size(75, 23);
+            this.btnReady.Size = new System.Drawing.Size(271, 41);
             this.btnReady.TabIndex = 6;
-            this.btnReady.Text = "Ready";
+            this.btnReady.Text = "Prepare stopwatch";
             this.btnReady.UseVisualStyleBackColor = true;
             this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
             // 
