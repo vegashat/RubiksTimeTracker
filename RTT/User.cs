@@ -26,14 +26,9 @@ namespace RTT
         {
             _users = Database.DBContext.Users;
 
-
-
             cboUsers.DataSource = _users.ToList();
             cboUsers.DisplayMember = "Username";
             cboUsers.ValueMember = "UserId";
-
-            
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -54,7 +49,7 @@ namespace RTT
         }
 
         private void btnSave_Click(object sender, EventArgs e)
-        {
+        { 
             if (_currentUser == null)
             {
                 _currentUser = new User();
