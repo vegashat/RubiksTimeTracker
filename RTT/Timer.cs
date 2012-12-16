@@ -159,8 +159,8 @@ namespace RTT
             stopwatch.Start();
             solveTimer.Start();
 
-            cboUsers.Enabled = false;
-            btnSave.Enabled = false;
+            //cboUsers.Enabled = false;
+            //btnSave.Enabled = false;
             
         }
 
@@ -169,8 +169,8 @@ namespace RTT
             stopwatch.Stop();
             solveTimer.Stop();
 
-            cboUsers.Enabled = true;
-            btnSave.Enabled = true;
+            //cboUsers.Enabled = true;
+            //btnSave.Enabled = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
