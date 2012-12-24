@@ -1,4 +1,9 @@
-RubiksTimeTracker
-=================
+# Rubiks Cube Time Tracker
 
-Time how long it taik'skes to solve Rubik's cube and store in database
+## Hardware
+
+Arduino based program that uses a photocell sensor to detect the amount of light.
+
+## Software
+
+A .NET program that connects to the hardware to time the solve and store the time in a database.
